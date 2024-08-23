@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Data Visualization</h1>
+    <table>
+        <thead>
+            <tr>
+                {% for column in data[0].keys() %}
+                    <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+                <tr>
+                    {% for item in row.values() %}
+                        <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

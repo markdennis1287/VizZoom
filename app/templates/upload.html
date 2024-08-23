@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Upload Data</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.dataset.label }}<br>
+            {{ form.dataset }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
+
