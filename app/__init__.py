@@ -19,7 +19,7 @@ login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
 # Add Flask-Migrate initialization
-migrate = Migrate(app, db)  # Add this line
+migrate = Migrate(app, db)
 
 # Import routes after initializing the app to avoid circular imports
 from app import routes, models  # Ensure models is imported to register the models with SQLAlchemy
