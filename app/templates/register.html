@@ -2,7 +2,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h2>Register</h2>
+    <h2>Sign Up</h2>
     <form method="POST" action="{{ url_for('register') }}">
         {{ form.hidden_tag() }}
         <div>
@@ -49,6 +49,6 @@
                 </ul>
             {% endif %}
         </div>
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn">Sign Up</button>
     </form>
 {% endblock %}

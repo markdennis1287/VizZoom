@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Login</h1>
+    <h1>Log In</h1>
     <form method="POST">
         {{ form.hidden_tag() }}
         <p>
@@ -14,7 +14,7 @@
         <p>
             {{ form.remember }} {{ form.remember.label }}
         </p>
-        <p class="btn">{{ form.submit() }}</p>
+        <button type="submit" class="btn">Log In</button>
     </form>
 {% endblock %}
 
