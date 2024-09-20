@@ -6,6 +6,12 @@ from flask_login import login_user, current_user, logout_user, login_required
 import pandas as pd
 import os
 
+
+@app.route('/')
+def landing_page():
+    return render_template('landing_page.html')
+
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -45,49 +51,41 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-from flask import Flask, request, redirect, url_for, flash, render_template
-import os
-from flask_login import login_required
 
-app = Flask(__name__)
-app.secret_key = 'supersecretkey'
+ALLOWED_EXTENSIONS = {'csv'}
 
-UPLOAD_FOLDER = 'uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+def allowed_file(filename):
+    # Check if the file has a valid extension
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/upload', methods=['GET', 'POST'])
-@login_required  # This will ensure the user is logged in before uploading
+
+@app.route("/upload", methods=['GET', 'POST'])
+@login_required
 def upload():
-    if request.method == 'POST':  # Handle file upload when form is submitted
-        # Check if the post request has the file part
+    if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
-            return redirect(request.url)  # Stay on the same page to show error message
-
+            return redirect(request.url)
+        
         file = request.files['file']
-
-        # If the user does not select a file, the browser submits an empty part without a filename
+        
         if file.filename == '':
             flash('No selected file')
-            return redirect(request.url)  # Stay on the same page if no file is selected
+            return redirect(request.url)
+        
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            upload_folder = 'uploads'
+            if not os.path.exists(upload_folder):
+                os.makedirs(upload_folder)
 
-        if file:
-            # Ensure the uploads directory exists
-            if not os.path.exists(UPLOAD_FOLDER):
-                os.makedirs(UPLOAD_FOLDER)
-
-            # Save the file
-            filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+            filepath = os.path.join(upload_folder, file.filename)
             file.save(filepath)
             
-            # After successfully saving, redirect to visualization page
             flash('File successfully uploaded')
-            return redirect(url_for('visualization'))
-
-        flash('File upload failed')
-        return redirect(url_for('upload'))  # In case something else goes wrong
-
-    # Render the upload form (for GET requests)
+            return redirect(url_for('visualization', filename=filename))
+    
+    # For GET requests, simply render the upload page
     return render_template('upload.html')
 
 
@@ -95,9 +93,14 @@ def upload():
 @app.route("/visualization/<filename>")
 @login_required
 def visualization(filename):
-    data = pd.read_csv(filename)
+    upload_folder = 'uploads'
+    filepath = os.path.join(upload_folder, filename)
+
+    if not os.path.exists(filepath):
+        flash("File not found")
+        return redirect(url_for('upload'))
+
+    data = pd.read_csv(filepath)
     return render_template('visualization.html', title='Data Visualization', data=data.to_dict(orient='records'))
 
 
-if __name__ == '__main__':
-    app.run(debug=True)

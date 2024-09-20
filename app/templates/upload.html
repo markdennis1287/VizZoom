@@ -1,11 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload File</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block content %}
     <h1>Upload File</h1>
     
     {% with messages = get_flashed_messages() %}
@@ -23,5 +17,5 @@
         <input type="file" name="file" id="file">
         <input type="submit" value="Upload">
     </form>
-</body>
-</html>
+
+{% endblock %}

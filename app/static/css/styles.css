@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #074c50;
     color: #333;
+    background-image: url(../images/cover-image.jpg);
 }
 
 .container {
@@ -31,3 +32,141 @@ h1, h2 {
     background-color: #4cae4c;
 }
 
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, p {
+    margin: 0.5em 0;
+}
+
+/* Navigation */
+header {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Intro Section */
+.intro-section {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #f4f4f4;
+}
+
+.intro-section .cover-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.intro-section h1 {
+    font-size: 3em;
+    margin-top: 20px;
+}
+
+.intro-section p {
+    font-size: 1.5em;
+    margin-top: 10px;
+}
+
+.intro-section .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.intro-section .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Feature Section */
+.feature-section {
+    padding: 50px;
+    background-color: #fff;
+}
+
+.feature-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.feature {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.feature img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+.feature h3 {
+    margin-top: 15px;
+    font-size: 1.5em;
+}
+
+/* About Section */
+.about-section {
+    padding: 50px;
+    background-color: #f4f4f4;
+}
+
+.about-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.about-section p, ul {
+    text-align: center;
+}
+
+.about-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-section ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.about-section ul li a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.about-section ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
